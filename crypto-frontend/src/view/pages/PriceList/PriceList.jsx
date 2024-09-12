@@ -7,7 +7,7 @@ export const PriceList = () => {
 
     useEffect(() => {
         // Fetch prices from the backend
-        axios.get('http://localhost:4000/crypto/api/prices')
+        axios.get('http://localhost:5000/crypto/api/prices')
             .then(response => {
                 setPrices(response.data);
             })
