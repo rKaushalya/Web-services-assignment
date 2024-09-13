@@ -11,7 +11,3 @@ phases:
   post_build:
     commands:
       - docker push 976193228213.dkr.ecr.ap-north-1.amazonaws.com/aws-assignment:latest
-      - echo Writing image definitions file...
-      - printf '[{"name":"web-assignment","imageUri":"%s"}]' 976193228213.dkr.ecr.ap-north-1.amazonaws.com/aws-assignment:latest > imagedefinitions.json   
-artifacts:
-  files: imagedefinitions.json
