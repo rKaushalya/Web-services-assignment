@@ -7,7 +7,7 @@ phases:
   build:
     commands:
       - docker build -t web-assignment .
-      - docker tag web-assignment:latest 976193228213.dkr.ecr.ap-north-1.amazonaws.com/aws-assignment:latest
+      - docker tag web-assignment:latest 976193228213.dkr.ecr.ap-south-1.amazonaws.com/aws-assignment:latest
   post_build:
     commands:
-      - docker push 976193228213.dkr.ecr.ap-north-1.amazonaws.com/aws-assignment:latest
+      - docker push 976193228213.dkr.ecr.ap-south-1.amazonaws.com/aws-assignment:latest
