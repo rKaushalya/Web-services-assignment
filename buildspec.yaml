@@ -7,7 +7,11 @@ phases:
   build:
     commands:
       - docker build -t web-assignment .
-      - docker tag web-assignment:latest 976193228213.dkr.ecr.ap-south-1.amazonaws.com/aws-assignment:latest
+      - docker tag web-assignment:latest 976193228213.dkr.ecr.eu-north-1.amazonaws.com/aws-assignment:latest
   post_build:
     commands:
-      - docker push 976193228213.dkr.ecr.ap-south-1.amazonaws.com/aws-assignment:latest
+      - docker push 976193228213.dkr.ecr.eu-north-1.amazonaws.com/aws-assignment:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"web-assignment","imageUri":"%s"}]' 976193228213.dkr.ecr.eu-north-1.amazonaws.com/aws-assignment:latest > imagedefinitions.json
+    artifacts:
+          files: imagedefinitions.json
