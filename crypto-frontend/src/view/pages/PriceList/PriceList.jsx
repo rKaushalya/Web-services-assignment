@@ -6,15 +6,17 @@ export const PriceList = () => {
     const [prices, setPrices] = useState([]);
 
     useEffect(() => {
-        // Fetch prices from the backend
-        axios.get('http://localhost:5000/crypto/api/prices')
-            .then(response => {
-                setPrices(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the data!', error);
-            });
-    }, []);
+        const fetchPrices = async () => {
+          try {
+            const response = await axios.get(`${window.location.origin}/crypto/api/prices`);
+            setPrices(response.data);
+          } catch (error) {
+            console.error("Error fetching data from backend", error);
+          }
+        };
+    
+        fetchPrices();
+      }, []);
 
     return (
         <div className="max-w-4xl mx-auto p-8 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 rounded-lg shadow-2xl">

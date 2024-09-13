@@ -1,11 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-assignment
+  name: web-assignment-deployment
+  namespace: blue  # Specify the namespace (blue or green)
   labels:
     app: web-assignment
 spec:
-  replicas: 2
+  replicas: 3  # Number of app instances (3 replicas)
   selector:
     matchLabels:
       app: web-assignment
@@ -16,9 +17,20 @@ spec:
     spec:
       containers:
         - name: web-assignment
-          image: 976193228213.dkr.ecr.eu-north-1.amazonaws.com/aws-assignment:latest
+          image: 976193228213.dkr.ecr.eu-north-1.amazonaws.com/aws-assignment:latest  # ECR image
           ports:
             - containerPort: 5000
-          env:
-            - name: NODE_ENV
-              value: "production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-assignment-service
+  namespace: blue  # Specify the namespace (blue or green)
+spec:
+  type: LoadBalancer  # Accessible from outside the cluster
+  selector:
+    app: web-assignment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

@@ -20,7 +20,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors());
+const corsOptions = {
+  origin: ['https://afa3b200e9b6f44bca16bf73016a7cc3-1931703484.eu-north-1.elb.amazonaws.com'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+
+app.use(cors(corsOptions));
+
 
 app.use('/', indexRouter);
 app.use('/crypto', cryptoRouter);
