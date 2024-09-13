@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-assignment
+  labels:
+    app: web-assignment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-assignment
+  template:
+    metadata:
+      labels:
+        app: web-assignment
+    spec:
+      containers:
+        - name: web-assignment
+          image: 976193228213.dkr.ecr.eu-north-1.amazonaws.com/aws-assignment:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: "production"
